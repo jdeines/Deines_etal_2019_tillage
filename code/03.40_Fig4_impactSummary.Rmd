@@ -1,0 +1,106 @@
+---
+title: 'Fig 4: Summary'
+author: "Jill Deines"
+date: "7/14/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    keep_md: true
+---
+
+Goal: make Figure 4. Labels adjusted in Inkscape (not provided).
+
+
+```{r knitrOpts, echo=FALSE}
+library(knitr)
+opts_chunk$set(cache=FALSE, fig.path='../figure/03.40_Fig4_summary/')
+```
+
+**R Packages Needed**
+
+```{r packages, message=FALSE, echo=TRUE, eval=TRUE, warning=TRUE}
+library(tidyverse)
+
+sessionInfo()
+```
+
+# Make Data Frame
+constant tillage numbers taken from 03.20 and 03.30 (maize and soy results)
+
+maize switch numbers taken from 01.10 and 01.20
+soy switch numbers taken from 02.10 and 02.20
+
+...didn't automate
+
+```{r makedf}
+
+ates <- data.frame(analysis = c('Long-term adoption\n(10+ years)',
+                                'Long-term adoption\n(10+ years)',
+                                'Initial Conversion\n(effect per year)',
+                                'Switch to Conventional',
+                                 'Initial Conversion\n(effect per year)',
+                                'Switch to Conventional'),
+                   croptype = c('Maize','Soybeans',
+                                'Maize','Maize',
+                                'Soybeans','Soybeans'),
+                   ate = c(0.355, 0.024, 0.0341, 0.0318, 0.0012, 0.0215),
+                   ate_upper = c(0.373, 0.031, 0.0403, 0.0419, 0.0073, 0.0278),
+                   ate_lower = c(0.338, 0.0291, 0.0279, 0.0218, -0.00489, 0.0153),
+                   ate_perc = c(3.28, 0.74, 0.286, 0.268, 0.0334, 0.61),
+                   ate_upper_perc = c(3.44, 0.95, 0.337, 0.353, 0.204, 0.787),
+                   ate_lower_perc = c(3.12, 0.53, 0.234, 0.183, -0.137,0.433),
+                   stringsAsFactors = FALSE)
+
+```
+
+helper function for legend spacing
+
+```{r spacerFun}
+# function to increase vertical spacing between legend keys
+# @clauswilke
+draw_key_polygon3 <- function(data, params, size) {
+  lwd <- min(data$size, min(size) / 4)
+
+  grid::rectGrob(
+    width = grid::unit(0.6, "npc"),
+    height = grid::unit(0.6, "npc"),
+    gp = grid::gpar(
+      col = data$colour,
+      fill = alpha(data$fill, data$alpha),
+      lty = data$linetype,
+      lwd = lwd * .pt,
+      linejoin = "mitre"
+    ))
+}
+
+# register new key drawing function, 
+# the effect is global & persistent throughout the R session
+GeomBar$draw_key = draw_key_polygon3
+
+```
+
+
+```{r summarypercentages, fig.width = 3.25, fig.height = 3.5, dpi = 300, dev = c('png','pdf')}
+ggplot(ates %>% filter(analysis != 'Switch to Conventional'),
+       aes(x = croptype, y = ate_perc, ymin = ate_lower_perc, ymax = ate_upper_perc,
+           fill = analysis, group = interaction(analysis,croptype))) +
+  ylab('Average Yield Impact (%)') + xlab('') +
+  scale_fill_manual(values = rev(c('#1f78b4','#a6cee3'))) + #,'#fdbf6f')) + 
+  geom_bar(stat='identity', position = position_dodge2(), 
+           color = 'black', size = .2) +
+  ylim(c(-.15,3.5)) +
+  geom_errorbar(position = position_dodge(width = 0.9), width = .2) +
+  geom_text(aes(label = ate_perc), position = position_dodge(width = .9),vjust = -1.9) +
+  geom_vline(xintercept = 1.5, linetype = 'dashed') +
+  theme_bw() + theme(legend.title = element_blank(),
+                     panel.grid = element_blank(),
+                     legend.key = element_rect(color = NA, fill = NA),
+                     legend.key.size =unit(.9, 'cm'),
+                     legend.background = element_blank(),
+                     #legend.position = 'top')
+                    legend.position = c(.75, .8))
+```
+
+
+
