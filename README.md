@@ -1,3 +1,5 @@
+https://zenodo.org/badge/DOI/10.5281/zenodo.3525359.svg
+
 # Deines, Wang, & Lobell 2019: Derived data and analysis code
 
 1 November 2019  
