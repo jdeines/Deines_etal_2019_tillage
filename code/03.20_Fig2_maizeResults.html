@@ -1640,7 +1640,15 @@ cates &lt;- overlapTau %&gt;%
          croptype = 'Maize') %&gt;%
   dplyr::select(c(croptype, predictions, tauPercents, year)) 
 
-ggplot(cates,
+# get ranges
+cates %&gt;%
+  summarize(p5 = quantile(tauPercents, probs = c(0.05)),
+            p95 = quantile(tauPercents, probs = c(0.95)))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##      p5   p95
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1 -1.29  8.08</code></pre>
+<pre class="r"><code>ggplot(cates,
        aes(x = tauPercents, fill = ..x..)) +
   geom_histogram(breaks = seq(palMin, palMax, (-palMin + palMax)/colorbreaks),
                  color = 'gray30') +
