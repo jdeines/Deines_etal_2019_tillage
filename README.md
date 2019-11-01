@@ -11,7 +11,7 @@ Deines, JM, S Wang, & DB Lobell. 2019. Satellites reveal a small positive yield 
 ## Contents
 
 ### Data
-All data needed to reproduce the original analyses and figures from Deines et al. 2019 can be found in the zipped `data` folder stored in a separate Zenodo repository at https://doi.org/10.5281/zenodo.3525346. This includes the field-level samples derived from the input annual tillage and yield map datasets, along with associated covariates. Due to privacy concerns, field locations are reported by county only (latitude and longitude have been removed), and the input map datasets are not publicly available but may obtained from their sources upon reasonable request.
+All data needed to reproduce the original analyses and figures from Deines et al. 2019 can be found in the zipped `data` folder stored in a separate Zenodo repository at https://doi.org/10.5281/zenodo.3525346 (~11.3 gb unzipped). This includes the field-level samples derived from the input annual tillage and yield map datasets, along with associated covariates. Due to privacy concerns, field locations are reported by county only (latitude and longitude have been removed), and the input map datasets are not publicly available but may obtained from their sources upon reasonable request.
 
 For best integration with the associated code, download this file and place the unzipped `data` folder in this repo at the same level as `code` and `figure`. Alternatively, modify the directory path at the top of each script for the location of this `data` folder.
 
