@@ -1,7 +1,7 @@
-# Deines, Wang, & Lobell, 2019, ERL, Derived data and analysis code
+# Deines, Wang, & Lobell 2019: Derived data and analysis code
 
 1 November 2019  
-Code by: Jillian Deines with contributions from Sherrie Wang 
+Code by: Jillian Deines with contributions from Sherrie Wang   
 Contact: jillian.deines@gmail.com  
 
 This codebase accompanies the paper:
@@ -22,9 +22,9 @@ All data needed to reproduce the original analyses and figures from Deines et al
 
 ### Code
 
-* Code to perform all paper analyses and generate figures in the paper (`code` folder)
+* Code to perform all paper analyses and generate figures in the paper 
 
-Script filenames are numbered in sequential order of use. Processing is done using [R Markdown](https://rmarkdown.rstudio.com/) within an R project structure.
+Script filenames are numbered in sequential order of use. Processing is done using [R Markdown](https://rmarkdown.rstudio.com/) within an R project structure. OPerational scripts have extension .Rmd; knitted outputs in .md (for easing viewing on Github) and .html (for desktop viewing) are also provided.
 
 ### Figure
 Figure output from scripts used to generate figures in the main text.
